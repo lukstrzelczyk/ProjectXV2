@@ -18,6 +18,7 @@ class Csoldier :   public Person
 		std::string date;
 	public:
 		CCommendation();
+		CCommendation(std::string com, std::string date);
 		friend std::ostream& operator <<(std::ostream& out, const Csoldier& S);
 		friend class Csoldier;
 	};
@@ -29,8 +30,8 @@ public:
 	Csoldier(size_t _age, std::string _name, std::string _surname, std::string _rank, size_t num, size_t id);
 	Csoldier(std::string rank);
 	Csoldier(const Csoldier& sample);
-	Csoldier(std::string _rank, size_t num);
 	Csoldier(std::string text, int cos);
+	Csoldier(size_t num);
 	~Csoldier();
 	//-------------------
 	std::string get_name()const;
@@ -40,7 +41,11 @@ public:
 	std::string get_date(const size_t& index)const;
 	size_t get_ID()const;
 	size_t get_age()const;
-	//
+	size_t get_num()const;
+	//-------------------
+
 	void introduce();//show
+	void add_order(std::string order);
+	void take_away_order(const short& index);
 };
 

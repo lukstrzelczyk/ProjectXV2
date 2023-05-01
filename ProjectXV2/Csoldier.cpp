@@ -1,5 +1,6 @@
 #include "Csoldier.h"
 #include <iomanip>
+#include <Windows.h>
 #include <string>
 
 enum { jan = 1, feb = 2, mar = 3, apr = 4, may = 5, jun = 6, jul = 7, aug = 8, sept = 9, oct = 10, nov = 11, dec = 12 };
@@ -17,6 +18,9 @@ Csoldier::CCommendation::CCommendation()
 	date.append(".");
 	date.append(std::to_string(year));
 }
+Csoldier::CCommendation::CCommendation(std::string com, std::string dat):commendation{com},date{dat}
+{}
+
 std::ostream& operator <<(std::ostream& out, const Csoldier& S) {
 	out << "\t" << S.name << " " << S.surname << std::endl;
 	out << "Rank:               " << S.rank << std::endl;
@@ -102,13 +106,19 @@ Csoldier::Csoldier(std::string text, int cos) {
 	decorations = nullptr;
 }
 
-
-Csoldier::Csoldier(std::string _rank, size_t num) : rank(_rank), num_of_dec(num) {
-	age = Random(18, 50);
+Csoldier::Csoldier(size_t num)
+{
+	age = Random(18, 54);
 	name = imiona[Random(0, 7)];
 	surname = nazwiska[Random(0, 7)];
-	decorations = nullptr;
+	rank = "private";
+	num_of_dec = num;
+	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
+	for (auto i = 0; i < num_of_dec; i++) {
+		decorations[i] = new CCommendation;
+	};
 }
+
 //---------------------------------------------------
 //desruktor------------------------------------------
 
@@ -124,9 +134,9 @@ Csoldier::~Csoldier()
 
 void Csoldier::introduce()
 {
-	std::cout <<"Name:"<<std::setw(20)<< name << std::endl;
-	std::cout <<"Surname:" << std::setw(20)<< surname << std::endl;
-	std::cout <<"Rank:" << std::setw(20) << rank << std::endl;
+	std::cout <<"Name:"<<std::setw(10)<<"" << name << std::endl;
+	std::cout <<"Surname:" << std::setw(7)<<""<< surname << std::endl;
+	std::cout <<"Rank:" << std::setw(10) << "" << rank << std::endl;
 }
 
 std::string Csoldier::get_name() const{ return name; }
@@ -135,4 +145,53 @@ std::string Csoldier::get_rank() const{ return rank; }
 std::string Csoldier::get_commendation(const size_t& index) const{ return decorations[index]->commendation; }
 std::string Csoldier::get_date(const size_t& index) const{ return decorations[index]->date; }
 size_t Csoldier::get_age()const { return age; }
+size_t Csoldier::get_num() const { return num_of_dec; }
 size_t Csoldier::get_ID()const { return ID; }
+
+void Csoldier::add_order(std::string order)
+{
+	CCommendation** temp = new CCommendation*[num_of_dec + 1];
+	for (auto i = 0; i < num_of_dec; i++) {
+		temp[i] = decorations[i];
+	}
+	time_t now = time(0);
+	tm t;
+	std::string day;
+	localtime_s(&t, &now);
+	day = std::to_string(t.tm_mday);
+	day.append(".");
+	day.append(std::to_string(t.tm_mon + 1));
+	day.append(".");
+	day.append(std::to_string(t.tm_year + 1900));
+	temp[num_of_dec] = new CCommendation(order,day);
+	delete[] decorations;
+	decorations = temp;
+	num_of_dec++;
+}
+
+void Csoldier::take_away_order(const short& index)
+{
+	if (num_of_dec == 0) {
+		std::cout << "This soldier has already no commendations";
+		Sleep(1000);
+		return;
+	}
+	else if (num_of_dec == 1) {
+		delete[] this->decorations;
+		this->decorations = nullptr;
+	}
+	else {
+		CCommendation** temp = new CCommendation*[num_of_dec - 1];
+		for (auto i = 0, j = 0; i < num_of_dec - 1; i++, j++)
+		{
+			if (j == index) {
+				delete decorations[j];
+				j++;
+			}
+			temp[i] = decorations[j];
+		}
+		delete[] this->decorations;
+		this->decorations = temp;
+	}
+	num_of_dec--;
+}
