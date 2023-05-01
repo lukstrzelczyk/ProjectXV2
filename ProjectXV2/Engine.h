@@ -11,6 +11,7 @@ public:
 	size_t get_p()const { return power; }
 	size_t get_w()const { return weight; }
 	size_t get_t()const { return torque; }
+	virtual std::string get_name()const = 0;
 	void set_p(const size_t& p) { power = p; }
 	void set_w(const size_t& w) { weight = w; }
 	void set_t(const size_t& t) { torque = t; }
