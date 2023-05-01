@@ -30,6 +30,10 @@ size_t Vehicle::get_crew()const
 {
 	return crew;
 }
+void Vehicle::set_range(const size_t&r)
+{
+	range = r;
+}
 std::string Vehicle::get_type()const
 {
 	return type;

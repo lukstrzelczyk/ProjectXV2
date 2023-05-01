@@ -20,12 +20,14 @@ public:
 	Vehicle(size_t w = 0, size_t s = 0, size_t ft = 0, size_t f = 0, std::string t = "", size_t c = 0) ;
 	~Vehicle();
 	virtual void refuel() = 0;
-	virtual void drive() = 0;
+	virtual void drive(const size_t& distance) = 0;
+	virtual void show() = 0;
 	size_t get_weight()const;
 	size_t get_speed()const;
 	size_t get_range()const;
 	size_t get_max_range()const;
 	size_t get_crew()const;
+	void set_range(const size_t&);
 	std::string get_type()const;
 };
 

@@ -21,10 +21,10 @@ size_t Diesel::get_combustion()const {
 
 void Diesel::show_properties()
 {
-	std::cout << std::setw(12) << "Name:" << name << std::endl;
-	std::cout << std::setw(12) << "Power: " << get_p() << " hp"<<std::endl;
-	std::cout << std::setw(12) << "Weight: " << get_w() << " kg"<<std::endl;
-	std::cout << std::setw(12) << "Torque: " << get_t() << " N/m"<<std::endl;
-	std::cout << std::setw(12) << "Fuel type: " << fuel_type << std::endl;
-	std::cout << std::setw(12) << "Combustion: " << combustion<<"l/100km" << std::endl;
+	std::cout  << "Name:" << std::setw(12) << name << std::endl;
+	std::cout  << "Power: " << std::setw(12) << get_p() << " hp"<<std::endl;
+	std::cout  << "Weight: " << std::setw(12) << get_w() << " kg"<<std::endl;
+	std::cout  << "Torque: " << std::setw(12) << get_t() << " N/m"<<std::endl;
+	std::cout  << "Fuel type: " << std::setw(12) << fuel_type << std::endl;
+	std::cout  << "Combustion: " << std::setw(12) << combustion<<"l/100km" << std::endl;
 }

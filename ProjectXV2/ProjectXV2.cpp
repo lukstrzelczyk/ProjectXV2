@@ -1,12 +1,19 @@
-
-
 #include <iostream>
+#include "Functions.h"
+#include "Stryker.h"
+#include "Vehicle.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
-    std::cout << "Hello World!\n";
-    std::cout << "Hello World!\n";
-    std::cout << "Hello World!\n";
+	Stryker* s = new Stryker;
+	std::cout << (*s);
+	//s->show();
+	s->drive(100);
+	std::cout << (*s);
+	//s->show();
+	s->refuel();
+	std::cout << (*s);
+	delete s;
+	
 }
 
