@@ -1,4 +1,5 @@
 #include "Csoldier.h"
+#include <iomanip>
 #include <string>
 
 enum { jan = 1, feb = 2, mar = 3, apr = 4, may = 5, jun = 6, jul = 7, aug = 8, sept = 9, oct = 10, nov = 11, dec = 12 };
@@ -101,6 +102,7 @@ Csoldier::Csoldier(std::string text, int cos) {
 	decorations = nullptr;
 }
 
+
 Csoldier::Csoldier(std::string _rank, size_t num) : rank(_rank), num_of_dec(num) {
 	age = Random(18, 50);
 	name = imiona[Random(0, 7)];
@@ -119,3 +121,18 @@ Csoldier::~Csoldier()
 	decorations = nullptr;
 	num_of_dec = 0;
 }
+
+void Csoldier::introduce()
+{
+	std::cout <<"Name:"<<std::setw(20)<< name << std::endl;
+	std::cout <<"Surname:" << std::setw(20)<< surname << std::endl;
+	std::cout <<"Rank:" << std::setw(20) << rank << std::endl;
+}
+
+std::string Csoldier::get_name() const{ return name; }
+std::string Csoldier::get_surname() const{ return surname; }
+std::string Csoldier::get_rank() const{ return rank; }
+std::string Csoldier::get_commendation(const size_t& index) const{ return decorations[index]->commendation; }
+std::string Csoldier::get_date(const size_t& index) const{ return decorations[index]->date; }
+size_t Csoldier::get_age()const { return age; }
+size_t Csoldier::get_ID()const { return ID; }

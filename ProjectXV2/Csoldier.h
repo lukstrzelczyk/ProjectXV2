@@ -31,5 +31,16 @@ public:
 	Csoldier(const Csoldier& sample);
 	Csoldier(std::string _rank, size_t num);
 	Csoldier(std::string text, int cos);
+	~Csoldier();
+	//-------------------
+	std::string get_name()const;
+	std::string get_surname()const;
+	std::string get_rank()const;
+	std::string get_commendation(const size_t& index)const;
+	std::string get_date(const size_t& index)const;
+	size_t get_ID()const;
+	size_t get_age()const;
+	//
+	void introduce();//show
 };
 
