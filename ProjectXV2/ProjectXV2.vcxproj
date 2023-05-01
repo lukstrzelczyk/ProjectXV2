@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Csoldier.cpp" />
     <ClCompile Include="Diesel.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Functions.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Csoldier.h" />
     <ClInclude Include="Diesel.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Functions.h" />
