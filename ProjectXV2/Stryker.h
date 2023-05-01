@@ -12,6 +12,10 @@ public:
 	Stryker(std::string v, std::string arm, size_t no, size_t id, size_t w = 16470, size_t s = 97, size_t ft = 500, size_t f = 500, std::string t = "ICV", size_t c = 2);
 	Stryker(const Stryker& clone);
 	~Stryker();
-	Stryker& operator=(const Stryker& clone);
+	Stryker& operator=(const Stryker& clone) {
+		this->Stryker::~Stryker();
+		this->Stryker::Stryker(clone);
+
+	}
 };
 

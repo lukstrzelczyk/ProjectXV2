@@ -1,6 +1,6 @@
 #include "Stryker.h"
 
-Stryker::Stryker(std::string v, std::string arm, size_t no, size_t id, size_t w=16470, size_t s=97, size_t ft=500, size_t f=500, std::string t="ICV", size_t c=2)
+Stryker::Stryker(std::string v, std::string arm, size_t no, size_t id, size_t w, size_t s, size_t ft, size_t f, std::string t, size_t c)
 	:
 	Vehicle(w, s, ft, f, t, c), version{ v }, armament{ arm }, number_of_carried_soldiers{ no },
 	ID{ id }
@@ -25,8 +25,3 @@ Stryker::~Stryker()
 	
 }
 
-Stryker& Stryker::operator=(const Stryker& clone)
-{
-	this->Stryker::~Stryker();
-	this->Stryker::Stryker(clone);
-}

@@ -1,6 +1,6 @@
 #include "Vehicle.h"
 
-Vehicle::Vehicle(size_t w=0, size_t s=0, size_t ft=0, size_t f=0, std::string t="", size_t c=0) : weight{w}, speed{s}
+Vehicle::Vehicle(size_t w, size_t s, size_t ft, size_t f, std::string t, size_t c) : weight{w}, speed{s}
 , max_range{ ft }, range{ f }, type{ t }, crew{ c } {
 	engine = nullptr;
 }

@@ -132,6 +132,7 @@
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="ProjectXV2.cpp" />
+    <ClCompile Include="Stryker.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="Stryker.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
