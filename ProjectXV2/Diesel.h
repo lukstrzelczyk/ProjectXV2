@@ -9,6 +9,9 @@ class Diesel: public Engine
 	const size_t combustion{ 15 };//spalanie 10l/100km
 public:
 	Diesel(std::string n="Caterpillar C7", size_t p=350, size_t w= 588, size_t t=1254);
+	std::string get_name()const;
+	std::string get_fuel_t()const;
+	size_t get_combustion()const;
 	void show_properties();
 };
 

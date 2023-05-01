@@ -5,6 +5,20 @@
 Diesel::Diesel(std::string n, size_t p , size_t w, size_t t) : name{n},Engine(p,w,t)
 {}
 
+std::string Diesel::get_name() const
+{
+	return name;
+}
+
+std::string Diesel::get_fuel_t() const
+{
+	return fuel_type;
+}
+
+size_t Diesel::get_combustion()const {
+	return combustion;
+}
+
 void Diesel::show_properties()
 {
 	std::cout << std::setw(12) << "Name:" << name << std::endl;
