@@ -22,33 +22,20 @@ Csoldier::CCommendation::CCommendation(std::string com, std::string dat):commend
 {}
 
 std::ostream& operator <<(std::ostream& out, const Csoldier& S) {
-	out << "\t" << S.name << " " << S.surname << std::endl;
-	out << "Rank:               " << S.rank << std::endl;
-	out << "Age:                " << S.age << std::endl;
-	out << "ID:                 " << S.ID << std::endl;
-	out << "Ccomendations:      ";
-	if (S.num_of_dec == 0)out << "No commendations\n";
-	else {
+	out << S.name << ";" << S.surname;
+	out << ";" << S.rank ;
+	out << ";" << S.age ;
+	out << ";" << S.ID ;
+	out << ";" << S.num_of_dec;
+	if (S.num_of_dec)out << ";";
+	{
 		for (auto i = 0; i < S.num_of_dec; i++) {
-			out << S.decorations[i]->commendation << " " << S.decorations[i]->date << "; ";
+			out << S.decorations[i]->commendation << ";" << S.decorations[i]->date << "; ";
 		}
-		out << std::endl;
 	}
 	return out;
 }
 
-Csoldier::Csoldier()
-{
-	age = Random(18, 54);
-	name = imiona[Random(0, 7)];
-	surname = nazwiska[Random(0, 7)];
-	rank = enlisted_ranks[0];
-	num_of_dec = Random(0, 3);
-	if (num_of_dec) decorations = new CCommendation*[num_of_dec];
-	for (auto i = 0; i < num_of_dec; i++) {
-		decorations[i] = new CCommendation;
-	}
-}
 
 Csoldier::Csoldier(size_t _age = Random(18, 54), std::string _name = imiona[Random(0, 7)], std::string _surname = nazwiska[Random(0, 7)], std::string _rank = enlisted_ranks[0], size_t num = Random(0, 3), size_t id = Random(1, 765))
 	:ID(id),  rank(_rank), num_of_dec(num)
@@ -194,4 +181,62 @@ void Csoldier::take_away_order(const short& index)
 		this->decorations = temp;
 	}
 	num_of_dec--;
+}
+
+Csoldier Csoldier::load(std::string text)
+{
+	size_t pos{};//zmienne używane przy .find()
+	size_t pos1{};
+	std::string* date = nullptr; 
+	std::string* orders = nullptr;
+	std::string temp{};
+	std::string name, surname, rank;
+	size_t age,id,num;
+	pos = text.find(';');
+	name = text.substr(0, pos);
+	pos1 = text.find(';', pos + 1);
+	surname = text.substr(pos + 1, pos1 - 1 - pos);
+	pos = text.find(';', pos1 + 1);
+	rank = text.substr(pos1 + 1, pos - 1 - pos1);
+	pos1 = text.find(';', pos + 1);
+	temp = text.substr(pos + 1, pos1 - 1 - pos);
+	age = digit_check(temp, "age");
+	pos = text.find(';', pos1 + 1);
+	temp = text.substr(pos1 + 1, pos - 1 - pos1);
+	id = digit_check(temp, "ID");
+	pos1 = text.find(';', pos + 1);
+	temp = text.substr(pos + 1, pos1 - 1 - pos);
+	num = digit_check(temp, "num");
+	if (num) {
+		date = new std::string[num];
+		orders = new std::string[num];
+		for (auto i = 0; i < num; i++) {
+			pos = text.find(';', pos1 + 1);
+			orders[i] = text.substr(pos1 + 1, pos - 1 - pos1);
+			pos1 = text.find(';', pos + 1);
+			date[i] = text.substr(pos + 1, pos1 - 1 - pos);
+		}
+
+	}
+	Csoldier nowy{age,name,surname,rank,num,id};
+	for (auto i = 0; i < num; i++) {
+		nowy.decorations[i]->commendation = orders[i];
+		nowy.decorations[i]->date = date[i];
+	}
+	return nowy;
+}
+
+void Csoldier::show() {
+	std::cout<< "\t" << name << " " << surname << std::endl;
+	std::cout << "Rank:               " << rank << std::endl;
+	std::cout << "Age:                " << age << std::endl;
+	std::cout << "ID:                 " << ID << std::endl;
+	std::cout << "Ccomendations:      ";
+	if (num_of_dec == 0)std::cout << "No commendations\n";
+	else {
+		for (auto i = 0; i < num_of_dec; i++) {
+			std::cout << decorations[i]->commendation << " " << decorations[i]->date << "; ";
+		}
+		std::cout << std::endl;
+	}
 }

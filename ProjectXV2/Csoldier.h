@@ -1,7 +1,6 @@
 #pragma once
 #include "Person.h"
 #include <iostream>
-#include <vector>
 #include "Functions.h"
 
 const std::string orders[] = { "Medal of Honor","Distinguished Service Cross","Purple Heart","Bronze Star Medal" };
@@ -26,7 +25,6 @@ class Csoldier :   public Person
 	CCommendation** decorations{ nullptr };
 	size_t num_of_dec;
 public: 
-	Csoldier();
 	Csoldier(size_t _age, std::string _name, std::string _surname, std::string _rank, size_t num, size_t id);
 	Csoldier(std::string rank);
 	Csoldier(const Csoldier& sample);
@@ -44,8 +42,15 @@ public:
 	size_t get_num()const;
 	//-------------------
 
-	void introduce();//show
+	void show();
+	void introduce();//show without orders
 	void add_order(std::string order);
 	void take_away_order(const short& index);
+	static Csoldier load(std::string text);
+	Csoldier& operator=(const Csoldier& clone) {
+		this->Csoldier::~Csoldier();
+		this->Csoldier::Csoldier(clone);
+	}
+	
 };
 
