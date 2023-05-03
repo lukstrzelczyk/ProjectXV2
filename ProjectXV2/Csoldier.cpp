@@ -21,21 +21,6 @@ Csoldier::CCommendation::CCommendation()
 Csoldier::CCommendation::CCommendation(std::string com, std::string dat):commendation{com},date{dat}
 {}
 
-std::ostream& operator <<(std::ostream& out, const Csoldier& S) {
-	out << S.name << ";" << S.surname;
-	out << ";" << S.rank ;
-	out << ";" << S.age ;
-	out << ";" << S.ID ;
-	out << ";" << S.num_of_dec;
-	if (S.num_of_dec)out << ";";
-	{
-		for (auto i = 0; i < S.num_of_dec; i++) {
-			out << S.decorations[i]->commendation << ";" << S.decorations[i]->date << "; ";
-		}
-	}
-	return out;
-}
-
 
 Csoldier::Csoldier(size_t _age, std::string _name, std::string _surname, std::string _rank, size_t num, size_t id)
 	:ID(id),  rank(_rank), num_of_dec(num)
@@ -242,6 +227,21 @@ Csoldier Csoldier::load(std::string text)
 		nowy.decorations[i]->date = date[i];
 	}
 	return nowy;
+}
+
+void Csoldier::printoperator(std::ostream& out)const
+{
+	out << name << ";" << surname;
+	out << ";" << rank;
+	out << ";" << age;
+	out << ";" << ID;
+	out << ";" << num_of_dec;
+	if (num_of_dec)out << ";";
+	{
+		for (auto i = 0; i < num_of_dec; i++) {
+			out << decorations[i]->commendation << ";" << decorations[i]->date << "; ";
+		}
+	}
 }
 
 void Csoldier::show() {

@@ -12,11 +12,12 @@ public:
     void promote_soldier(Csoldier& soldier);
     void introduce();
     void show();
-    friend std::ostream& operator<<(std::ostream& out, Officer o);
+    void printoperator(std::ostream& out)const;
     Officer& operator=(Officer& clone) {
         this->Csoldier::~Csoldier();
         this->Officer::Officer(clone);
     }
     static Officer* load(std::string text);
+
 };
 

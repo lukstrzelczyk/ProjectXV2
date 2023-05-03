@@ -18,10 +18,8 @@ class Csoldier :   public Person
 	public:
 		CCommendation();
 		CCommendation(std::string com, std::string date);
-		friend std::ostream& operator <<(std::ostream& out, const Csoldier& S);
 		friend class Csoldier;
 	};
-	friend std::ostream& operator <<(std::ostream& out, const Csoldier& S);
 	CCommendation** decorations{ nullptr };
 	size_t num_of_dec;
 public: 
@@ -55,6 +53,6 @@ public:
 		this->Csoldier::~Csoldier();
 		this->Csoldier::Csoldier(clone);
 	}
-	
+	void printoperator(std::ostream& out)const;
 };
 

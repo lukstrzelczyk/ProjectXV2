@@ -31,6 +31,12 @@ void Officer::show() {
 	std::cout << "Commanded unit: " << commanded_unit << std::endl;
 }
 
+void Officer::printoperator(std::ostream& out) const
+{
+	out<<commanded_unit<<';';
+	Csoldier::printoperator(out);
+}
+
 Officer* Officer::load(std::string text)
 {
 	size_t pos{};//zmienne używane przy .find()
@@ -73,12 +79,4 @@ Officer* Officer::load(std::string text)
 		nowy->set_order(i, orders[i], date[i]);
 	}
 	return nowy;
-}
-
-std::ostream& operator<<(std::ostream& out, Officer o)
-{
-	Csoldier p = o;
-	out << o.commanded_unit<<';';
-	out << p;
-	return out;
 }

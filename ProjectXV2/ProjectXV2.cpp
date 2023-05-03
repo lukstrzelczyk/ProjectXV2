@@ -14,30 +14,22 @@
 int main()
 {
 #ifdef DBG
-	//Csoldier* p ;
-
-	std::fstream file;
-	file.open("Officer.txt", std::ios::out);
-	std::string line;
-	//p = new Csoldier(Csoldier::load(line));
-	//p->show();
-	Officer* d = new Officer("Company B");
-	file << (*d);
-	file.close();
-	//Officer* c = new Officer(*d);
-	//p->show();
-	d->show();
-	//c->show();*/
-	file.open("Officer.txt", std::ios::in);
-	std::getline(file, line);
-	Officer* p= Officer::load(line) ;
 	
+	std::fstream file,file2;
+	file.open("Officer.txt", std::ios::in);
+	std::string line;
+	std::getline(file, line);
+	Person* d = Officer::load(line);
 	file.close();
-	p->show();
-	delete d;
+	file2.open("Soldier.txt", std::ios::in);
+	if (!file2.is_open()) { delete d; return 1; }
+	std::getline(file2, line);
+	Person* p=new Csoldier( Csoldier::load(line));
+	file2.close();
+	std::cout << (*p)<<std::endl;
+	std::cout << (*d);
 	delete p;
-	//delete c;*/
-
+	delete d;
 	return 0;
 #endif // !DBG
 
