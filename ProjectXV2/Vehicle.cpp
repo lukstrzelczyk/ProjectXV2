@@ -38,3 +38,8 @@ std::string Vehicle::get_type()const
 {
 	return type;
 }
+std::ostream& operator<<(std::ostream& out, const Vehicle& S)
+{
+	S.printoperator(out);
+	return out;
+}

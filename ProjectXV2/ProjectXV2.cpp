@@ -8,28 +8,19 @@
 #include "Person.h"
 #include "Csoldier.h"
 #include "Officer.h"
+#include "Unit.h"
 
-#define DBG 1
+void manage_soldier(const size_t& index);
+void manage_company();
+void load_from_file()
+
+//#define DBG 1
  
 int main()
 {
 #ifdef DBG
-	
-	std::fstream file,file2;
-	file.open("Officer.txt", std::ios::in);
-	std::string line;
-	std::getline(file, line);
-	Person* d = Officer::load(line);
-	file.close();
-	file2.open("Soldier.txt", std::ios::in);
-	if (!file2.is_open()) { delete d; return 1; }
-	std::getline(file2, line);
-	Person* p=new Csoldier( Csoldier::load(line));
-	file2.close();
-	std::cout << (*p)<<std::endl;
-	std::cout << (*d);
-	delete p;
-	delete d;
+	std::cout << (*Unit::get_Unit());
+	delete Unit::get_Unit();
 	return 0;
 #endif // !DBG
 
@@ -40,12 +31,10 @@ int main()
 	do {
 		system("cls");
 		std::cout << "\t\tProject X\n\n";
-		std::cout << "1. Init\n";
-		std::cout << "2. Manage Company\n";
-		std::cout << "3. Add volunteer\n";
-		std::cout << "4. Enlistment\n";
-		std::cout << "5. Next Year\n";
-		std::cout << "6. Add getline\n";
+		std::cout << "1. Manage Company\n";
+		std::cout << "2. Add vehicle\n";
+		std::cout << "3. Enlistment\n";
+		std::cout << "4. Next Year\n";
 		std::cout << "7. Load from file\n";
 		std::cout << "8. Save to file\n";
 		std::cout << "0. Exit\n";
@@ -53,6 +42,7 @@ int main()
 		switch (input_check(decision, 0, 8))
 		{
 		case 1:
+			manage_company();
 			break;
 		case 2:
 			system("cls");
@@ -87,3 +77,71 @@ int main()
 	return 0;
 }
 
+void manage_company() {
+	std::string dec{ "error" };
+	bool flag = true;
+	do {
+		system("cls");
+		std::cout << (*Unit::get_Unit());
+		std::cout << std::endl << "================================\n";
+		std::cout << "1. manage soldier\n";
+		std::cout << "2. delete soldier\n";
+		std::cout << "3. go back to menu\n";
+		std::getline(std::cin, dec);
+		switch (input_check(dec, 1, 3)) {
+		case 1:
+			manage_soldier( Random(0, Unit::get_Unit()->get_soldiers_size() - 1));
+			break;
+		case 2:
+			Unit::get_Unit()->delete_soldier(Random(0, Unit::get_Unit()->get_soldiers_size() - 1));
+			break;
+		case 3:
+			flag = false;
+			break;
+		default:
+			std::cout << "This option does not exist. Try again";
+			Sleep(1500);
+			break;
+		}
+	} while (flag);
+}
+
+void manage_soldier(const size_t& index) {
+	size_t t = 0;
+	std::string dec{ "error" };
+	bool flag = true;
+	do {
+		system("cls");
+		Unit::get_Unit()->show_soldier(index);
+		std::cout << std::endl << "================================\n";
+		std::cout << "1. add commendation\n";
+		std::cout << "2. take away commendation\n";
+		std::cout << "3. go back to menu\n";
+		std::getline(std::cin, dec);
+		switch (input_check(dec, 1, 3)) {
+		case 1:
+			//kompania->add_commendation(index,orders[Random(0,3)]);
+			Unit::get_Unit()->add_order(index,orders[Random(0, 3)]);
+			break;
+		case 2:
+			Unit::get_Unit()->take_away_order(index,t);
+			break;
+		case 3:
+			flag = false;
+			break;
+		default:
+			std::cout << "This option does not exist. Try again";
+			Sleep(1500);
+			break;
+		}
+	} while (flag);
+}
+void load_from_file()
+{
+	std::ifstream myFile("soldiers.txt");
+	if (myFile.is_open()) {
+		myFile >> (*Unit::get_Unit());
+	}
+	else std::cout << "unable to open the file\n";
+	myFile.close();
+}

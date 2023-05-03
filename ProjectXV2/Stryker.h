@@ -19,7 +19,7 @@ public:
 	}
 	void drive(const size_t& distance);
 	void refuel();
-	friend std::ostream& operator<<(std::ostream& out ,const Stryker& s);
 	void show();
+	void printoperator(std::ostream& out)const;
 };
 

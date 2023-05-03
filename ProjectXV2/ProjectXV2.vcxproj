@@ -135,6 +135,7 @@
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="ProjectXV2.cpp" />
     <ClCompile Include="Stryker.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="Officer.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Stryker.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

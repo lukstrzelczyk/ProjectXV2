@@ -19,6 +19,8 @@ private:
 public:
 	Vehicle(size_t w = 0, size_t s = 0, size_t ft = 0, size_t f = 0, std::string t = "", size_t c = 0) ;
 	~Vehicle();
+	virtual void printoperator(std::ostream& out) const = 0;
+	friend std::ostream& operator <<(std::ostream& out, const Vehicle& S);
 	virtual void refuel() = 0;
 	virtual void drive(const size_t& distance) = 0;
 	virtual void show() = 0;

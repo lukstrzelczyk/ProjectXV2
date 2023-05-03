@@ -56,19 +56,20 @@ void Stryker::show()
 	std::cout << "Range: " << get_range() << std::endl;
 }
 
-std::ostream& operator<<(std::ostream& out, const Stryker& s)
+void Stryker::printoperator(std::ostream& out) const
 {
-	out << s.name << "  " << s.version << std::endl;
-	out << "Type: " << s.get_type() << std::endl;
-	out << "Number of carried soldeirs: " << s.number_of_carried_soldiers << std::endl;
-	out << "Crew: " << s.get_crew() << std::endl;
-	out << "Armament: " << s.armament << std::endl;
-	out << "ID: " << s.ID << std::endl;
-	out << "Engine: "<<std::endl;
-	s.engine->show_properties();
-	out << "Weight: " << s.get_weight()<<std::endl;
-	out << "Speed: " << s.get_speed() << std::endl;
-	out << "Max range: " << s.get_max_range() << std::endl;
-	out << "Range: " << s.get_range() << std::endl;
-	return out;
+
+	out << name << "  " << version << std::endl;
+	out << "Type: " << get_type() << std::endl;
+	out << "Number of carried soldeirs: " << number_of_carried_soldiers << std::endl;
+	out << "Crew: " << get_crew() << std::endl;
+	out << "Armament: " << armament << std::endl;
+	out << "ID: " << ID << std::endl;
+	out << "Engine: " << std::endl;
+	engine->show_properties();
+	out << "Weight: " << get_weight() << std::endl;
+	out << "Speed: " << get_speed() << std::endl;
+	out << "Max range: " << get_max_range() << std::endl;
+	out << "Range: " << get_range() << std::endl;
 }
+
