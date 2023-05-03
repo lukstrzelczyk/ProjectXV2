@@ -2,23 +2,15 @@
 
 Officer::Officer(const Officer& clone):Csoldier(clone)
 {
-	/*age = clone.age;
-	name = clone.name;
-	surname = clone.surname;
-	set_rank( clone.get_rank());
-	num_of_dec = sample.num_of_dec;
-	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
-	for (auto i = 0; i < num_of_dec; i++) {
-		decorations[i] = new CCommendation;
-		decorations[i]->commendation = sample.decorations[i]->commendation;
-		decorations[i]->date = sample.decorations[i]->date;
-	}*/
 	commanded_unit = clone.commanded_unit;
 }
 
-Officer::Officer(std::string cu= "Company A") :commanded_unit{ cu }, Csoldier("first lieutenant")
+Officer::Officer(std::string cu, size_t _age, std::string _name, std::string _surname, std::string _rank, size_t num, size_t id):
+	commanded_unit{cu},Csoldier(_age,_name,_surname,_rank,num,id)
 {}
 
+Officer::Officer(std::string cu= "Company A") :commanded_unit{ cu }, Csoldier("first lieutenant")
+{}
 
 void Officer::promote_soldier(Csoldier& soldier)
 {
@@ -37,4 +29,56 @@ void Officer::introduce()
 void Officer::show() {
 	Csoldier::show();
 	std::cout << "Commanded unit: " << commanded_unit << std::endl;
+}
+
+Officer* Officer::load(std::string text)
+{
+	size_t pos{};//zmienne używane przy .find()
+	size_t pos1{};
+	std::string* date = nullptr;
+	std::string* orders = nullptr;
+	std::string temp{};
+	std::string name, surname, rank,cu;
+	size_t age, id, num;
+	pos1 = text.find(';');
+	cu = text.substr(0, pos1);
+	pos = text.find(';', pos1 + 1);
+	name = text.substr(pos1 + 1, pos - 1 - pos1);
+	pos1 = text.find(';', pos + 1);
+	surname = text.substr(pos + 1, pos1 - 1 - pos);
+	pos = text.find(';', pos1 + 1);
+	rank = text.substr(pos1 + 1, pos - 1 - pos1);
+	pos1 = text.find(';', pos + 1);
+	temp = text.substr(pos + 1, pos1 - 1 - pos);
+	age = digit_check(temp, "age");
+	pos = text.find(';', pos1 + 1);
+	temp = text.substr(pos1 + 1, pos - 1 - pos1);
+	id = digit_check(temp, "ID");
+	pos1 = text.find(';', pos + 1);
+	temp = text.substr(pos + 1, pos1 - 1 - pos);
+	num = digit_check(temp, "num");
+	if (num) {
+		date = new std::string[num];
+		orders = new std::string[num];
+		for (auto i = 0; i < num; i++) {
+			pos = text.find(';', pos1 + 1);
+			orders[i] = text.substr(pos1 + 1, pos - 1 - pos1);
+			pos1 = text.find(';', pos + 1);
+			date[i] = text.substr(pos + 1, pos1 - 1 - pos);
+		}
+
+	}
+	Officer* nowy=new Officer{cu, age,name,surname,rank,num,id };
+	for (auto i = 0; i < num; i++) {
+		nowy->set_order(i, orders[i], date[i]);
+	}
+	return nowy;
+}
+
+std::ostream& operator<<(std::ostream& out, Officer o)
+{
+	Csoldier p = o;
+	out << o.commanded_unit<<';';
+	out << p;
+	return out;
 }

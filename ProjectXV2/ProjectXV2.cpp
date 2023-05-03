@@ -16,20 +16,26 @@ int main()
 #ifdef DBG
 	//Csoldier* p ;
 
-	//std::fstream file;
-	//file.open("Soldier.txt", std::ios::in);
-	//std::string line;
-	//std::getline(file, line);
+	std::fstream file;
+	file.open("Officer.txt", std::ios::out);
+	std::string line;
 	//p = new Csoldier(Csoldier::load(line));
 	//p->show();
-	//file.close();
-	///*Officer* d = new Officer("Company B");
+	Officer* d = new Officer("Company B");
+	file << (*d);
+	file.close();
 	//Officer* c = new Officer(*d);
 	//p->show();
-	//d->show();
+	d->show();
 	//c->show();*/
-	//delete p;
-	///*delete d;
+	file.open("Officer.txt", std::ios::in);
+	std::getline(file, line);
+	Officer* p= Officer::load(line) ;
+	
+	file.close();
+	p->show();
+	delete d;
+	delete p;
 	//delete c;*/
 
 	return 0;

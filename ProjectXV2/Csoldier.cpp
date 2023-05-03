@@ -145,6 +145,12 @@ void Csoldier::set_rank(const size_t& num)
 	num_of_dec = num;
 }
 
+void Csoldier::set_order(const size_t& index, std::string order, std::string date)
+{
+	decorations[index]->commendation = order;
+	decorations[index]->date = date;
+}
+
 size_t Csoldier::get_ID()const { return ID; }
 
 void Csoldier::add_order(std::string order)

@@ -43,6 +43,7 @@ public:
 	size_t get_num()const;
 	void set_rank(const std::string& new_rank);
 	void set_rank(const size_t& num );
+	void set_order(const size_t& index, std::string order, std::string date);
 	//-------------------
 
 	void show();
