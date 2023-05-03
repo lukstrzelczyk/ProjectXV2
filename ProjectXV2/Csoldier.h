@@ -25,7 +25,8 @@ class Csoldier :   public Person
 	CCommendation** decorations{ nullptr };
 	size_t num_of_dec;
 public: 
-	Csoldier(size_t _age, std::string _name, std::string _surname, std::string _rank, size_t num, size_t id);
+	
+	Csoldier(size_t _age = Random(18, 54), std::string _name = imiona[Random(0, 7)], std::string _surname = nazwiska[Random(0, 7)], std::string _rank = enlisted_ranks[0], size_t num = Random(0, 3), size_t id = Random(1, 765));
 	Csoldier(std::string rank);
 	Csoldier(const Csoldier& sample);
 	Csoldier(std::string text, int cos);
@@ -40,6 +41,7 @@ public:
 	size_t get_ID()const;
 	size_t get_age()const;
 	size_t get_num()const;
+	void set_rank(const std::string& new_rank);
 	//-------------------
 
 	void show();

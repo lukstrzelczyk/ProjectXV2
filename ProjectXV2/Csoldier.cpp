@@ -37,7 +37,7 @@ std::ostream& operator <<(std::ostream& out, const Csoldier& S) {
 }
 
 
-Csoldier::Csoldier(size_t _age = Random(18, 54), std::string _name = imiona[Random(0, 7)], std::string _surname = nazwiska[Random(0, 7)], std::string _rank = enlisted_ranks[0], size_t num = Random(0, 3), size_t id = Random(1, 765))
+Csoldier::Csoldier(size_t _age, std::string _name, std::string _surname, std::string _rank, size_t num, size_t id)
 	:ID(id),  rank(_rank), num_of_dec(num)
 {
 	age = _age;
@@ -133,6 +133,12 @@ std::string Csoldier::get_commendation(const size_t& index) const{ return decora
 std::string Csoldier::get_date(const size_t& index) const{ return decorations[index]->date; }
 size_t Csoldier::get_age()const { return age; }
 size_t Csoldier::get_num() const { return num_of_dec; }
+
+void Csoldier::set_rank(const std::string& new_rank)
+{
+	rank = new_rank;
+}
+
 size_t Csoldier::get_ID()const { return ID; }
 
 void Csoldier::add_order(std::string order)
