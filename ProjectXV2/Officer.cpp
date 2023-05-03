@@ -1,7 +1,24 @@
 #include "Officer.h"
 
+Officer::Officer(const Officer& clone):Csoldier(clone)
+{
+	/*age = clone.age;
+	name = clone.name;
+	surname = clone.surname;
+	set_rank( clone.get_rank());
+	num_of_dec = sample.num_of_dec;
+	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
+	for (auto i = 0; i < num_of_dec; i++) {
+		decorations[i] = new CCommendation;
+		decorations[i]->commendation = sample.decorations[i]->commendation;
+		decorations[i]->date = sample.decorations[i]->date;
+	}*/
+	commanded_unit = clone.commanded_unit;
+}
+
 Officer::Officer(std::string cu= "Company A") :commanded_unit{ cu }, Csoldier("first lieutenant")
 {}
+
 
 void Officer::promote_soldier(Csoldier& soldier)
 {

@@ -14,19 +14,26 @@
 int main()
 {
 #ifdef DBG
-	Csoldier* p = new Csoldier;
-	Officer* d = new Officer;
-	p->show();
-	d->show();
-	d->promote_soldier(*p);
-	p->show();
-	delete p;
-	delete d;
+	//Csoldier* p ;
+
+	//std::fstream file;
+	//file.open("Soldier.txt", std::ios::in);
+	//std::string line;
+	//std::getline(file, line);
+	//p = new Csoldier(Csoldier::load(line));
+	//p->show();
+	//file.close();
+	///*Officer* d = new Officer("Company B");
+	//Officer* c = new Officer(*d);
+	//p->show();
+	//d->show();
+	//c->show();*/
+	//delete p;
+	///*delete d;
+	//delete c;*/
 
 	return 0;
 #endif // !DBG
-
-
 
 	std::string decision;
 	size_t cons{ 0 };

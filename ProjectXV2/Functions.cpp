@@ -1,5 +1,4 @@
 #include "Functions.h"
-//#include "CCompany.h"
 #include <random>
 #include <string>
 #include <cctype>

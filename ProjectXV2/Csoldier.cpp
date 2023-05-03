@@ -7,7 +7,7 @@ enum { jan = 1, feb = 2, mar = 3, apr = 4, may = 5, jun = 6, jul = 7, aug = 8, s
 
 Csoldier::CCommendation::CCommendation()
 {
-	commendation = orders[Random(0, 4)];
+	commendation = orders[Random(0, 3)];
 	size_t day{ 1 }, month{ Random(1,12) }, year{ Random(1996,2018) };
 	if (month == feb)day = Random(1, 28);
 	else if (month == apr || month == jun || month == sept || month == nov)day = Random(1, 30);
@@ -55,6 +55,7 @@ Csoldier::Csoldier(std::string rank)
 	name = imiona[Random(0, 7)];
 	surname = nazwiska[Random(0, 7)];
 	this->rank = rank;
+	num_of_dec = Random(0, 3);
 	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
 	for (auto i = 0; i < num_of_dec; i++) {
 		decorations[i] = new CCommendation;
@@ -137,6 +138,11 @@ size_t Csoldier::get_num() const { return num_of_dec; }
 void Csoldier::set_rank(const std::string& new_rank)
 {
 	rank = new_rank;
+}
+
+void Csoldier::set_rank(const size_t& num)
+{
+	num_of_dec = num;
 }
 
 size_t Csoldier::get_ID()const { return ID; }
