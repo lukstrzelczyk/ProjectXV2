@@ -1,1 +1,24 @@
-Mieszko;Strzelczyk;private;32;323;1;Distinguished Service Cross;18.10.2005; 
+Mieszko;Strzelczyk;private;51;744;0
+Judasz;Kowalski;private;32;745;3;Distinguished Service Cross;3.12.2017; Purple Heart;30.12.2000; Distinguished Service Cross;3.2.2001; 
+Gniewko;Spokojny;private;20;746;0
+Tomasz;Von Richtoffen;private;29;747;1;Purple Heart;30.4.2002; 
+Andrzej;Strzelczyk;private;27;748;1;Distinguished Service Cross;13.9.2005; 
+Andrzej;Tomasz;private;35;749;0
+Andrzej;Tomasz;private;44;750;2;Bronze Star Medal;4.12.2010; Purple Heart;22.4.2015; 
+Jan;Tomasz;private;29;752;1;Distinguished Service Cross;10.5.2018; 
+Mieszko;Strzelczyk;private;42;753;1;Purple Heart;15.11.2012; 
+Zygmunt;Tomasz;private;26;754;3;Distinguished Service Cross;2.10.2002; Bronze Star Medal;16.12.2001; Purple Heart;22.2.2008; 
+Mieszko;Mniejszy;private;48;757;0
+Andrzej;Zdradziecki;private;22;758;2;Distinguished Service Cross;23.1.1996; Bronze Star Medal;24.4.2013; 
+Zygmunt;Mniejszy;private;48;760;3;Bronze Star Medal;8.3.1999; Medal of Honor;9.12.1996; Bronze Star Medal;28.2.1998; 
+Tomasz;Strzelczyk;private;47;761;1;Medal of Honor;3.10.2005; 
+Judasz;Von Richtoffen;private;42;762;3;Bronze Star Medal;7.7.2008; Medal of Honor;14.2.2004; Medal of Honor;23.5.2007; 
+Judasz;Zdradziecki;private;52;764;2;Bronze Star Medal;10.10.2009; Bronze Star Medal;7.4.2017; 
+Tomasz;Strzelczyk;private;46;765;3;Distinguished Service Cross;8.7.2018; Purple Heart;5.2.2005; Bronze Star Medal;20.3.2002; 
+Tomasz;Kowalski;private;47;766;3;Purple Heart;26.12.2013; Distinguished Service Cross;3.12.2014; Bronze Star Medal;6.2.2002; 
+Jan;Strzelczyk;private;19;767;0
+Tomasz;Tomasz;private;24;770;0
+Jan;Spokojny;private;22;771;0
+Mieszko;Mniejszy;private;52;772;3;Bronze Star Medal;26.11.2005; Distinguished Service Cross;3.4.2015; Purple Heart;5.1.2014; 
+Tomasz;Zdradziecki;private;50;773;0
+Andrzej;Mniejszy;private;40;774;0

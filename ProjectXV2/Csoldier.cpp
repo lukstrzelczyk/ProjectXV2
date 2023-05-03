@@ -79,12 +79,12 @@ Csoldier::Csoldier(std::string text, int cos) {
 	decorations = nullptr;
 }
 
-Csoldier::Csoldier(size_t num)
+Csoldier::Csoldier(size_t num, std::string rank,int cos)
 {
 	age = Random(18, 54);
 	name = imiona[Random(0, 7)];
 	surname = nazwiska[Random(0, 7)];
-	rank = "private";
+	this->rank = rank;
 	num_of_dec = num;
 	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
 	for (auto i = 0; i < num_of_dec; i++) {
@@ -125,9 +125,9 @@ void Csoldier::set_rank(const std::string& new_rank)
 	rank = new_rank;
 }
 
-void Csoldier::set_rank(const size_t& num)
+void Csoldier::set_age(const size_t& a)
 {
-	num_of_dec = num;
+	age = a;
 }
 
 void Csoldier::set_order(const size_t& index, std::string order, std::string date)

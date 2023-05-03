@@ -21,7 +21,7 @@ public:
 	virtual size_t get_age()const = 0;
 	virtual size_t get_num()const = 0;
 	virtual void set_rank(const std::string& new_rank) = 0;
-	virtual void set_rank(const size_t& num) = 0;
+	virtual void set_age(const size_t& a) = 0;
 	virtual void set_order(const size_t& index, std::string order, std::string date) = 0;
 	friend std::ostream& operator <<(std::ostream& out, const Person& S);
 	virtual void add_order(std::string order)=0;

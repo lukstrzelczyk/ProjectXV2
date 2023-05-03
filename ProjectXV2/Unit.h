@@ -21,9 +21,10 @@ class Unit
 	std::vector<Person*> soldiers;
 	std::vector<Stryker> vehicles;
 public:
+	void save_to_file();
 	Unit(std::string n = "Company A", std::string t = "Motorized",size_t nos=Random(20,40),size_t nov=Random(2,5));
 	~Unit();
-	Stryker operator[](const size_t& index);
+	Stryker& operator[](const size_t& index);
 	size_t get_soldiers_size()const;
 	size_t get_vehicles_size()const;
 	void show_soldier(const size_t& index);
@@ -35,5 +36,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, Unit& U);
 	static Unit* get_Unit();
 	void delete_soldier(const size_t& index);
+	void enlistment();
+	void aging();
 };
 

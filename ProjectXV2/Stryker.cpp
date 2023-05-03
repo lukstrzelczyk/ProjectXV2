@@ -1,4 +1,6 @@
 #include "Stryker.h"
+#include <Windows.h>
+
 
 Stryker::Stryker(std::string nam, std::string v, std::string arm, size_t no, size_t id, size_t w, size_t s, size_t mr, size_t r, std::string t, size_t c, std::string en, size_t p, size_t ew, size_t et)
 	:name{nam},version{v},armament{arm},number_of_carried_soldiers{no},ID{id},Vehicle{w,s,mr,r,t,c}
@@ -32,10 +34,12 @@ void Stryker::drive(const size_t& distance) {
 		set_range(get_range() - distance);
 		std::cout << "Vehicle has driven " << distance << "km and has fuel for another " << get_range() << "km" << std::endl;
 	}
+	Sleep(2000);
 }
 
 void Stryker::refuel()
 {
+	if(get_range()!=get_max_range())
 	set_range(get_max_range());
 	std::cout << "Fuel tank is full" << std::endl;
 }

@@ -21,7 +21,7 @@ Unit::~Unit()
 	}
 }
 
-Stryker Unit::operator[](const size_t& index)
+Stryker& Unit::operator[](const size_t& index)
 {
 	return vehicles.at(index);
 }
@@ -80,6 +80,24 @@ void Unit::delete_soldier(const size_t& index)
 	soldiers.erase(i);
 }
 
+void Unit::enlistment()
+{
+	size_t num = Random(0, 5);
+	for (auto i = 0; i <num ;i++) {
+		soldiers.push_back(new Csoldier{0,"private",0});
+	}
+	std::cout << "Added " << num << " soldiers";
+	Sleep(1000);
+}
+
+void Unit::aging()
+{
+	for (auto i = soldiers.begin(); i != soldiers.end(); ++i) {
+		(*i)->set_age((*i)->get_age() + 1);
+	}
+	leader->set_age(leader->get_age() + 1);
+}
+
 std::istream& operator>>(std::istream& in, Unit& U)
 {
 	std::string line;
@@ -126,10 +144,24 @@ std::ostream& operator<<(std::ostream& out, Unit& U)
 	}
 	out << "=============================================\n";
 	out << "Number of vehicles: "<<U.vehicles.size()<<std::endl;
+	out << "=============================================\n";
 	out << "Vehicle: " << std::endl;
 	for (auto i = U.vehicles.begin(); i != U.vehicles.end(); ++i) {
 		out << *i;
 		out << "------------------------------------------------------\n";
 	}
 	return out;
+}
+
+void Unit::save_to_file()
+{
+	std::ofstream file("Officer.txt");
+	std::ofstream file1("Soldier.txt");
+	file << (*leader);
+	file.close();
+	for (auto i = soldiers.begin(); i != soldiers.end(); ++i) {
+		if (i != soldiers.begin())file1 << std::endl;
+		file1 << (**i);
+	}
+	file1.close();
 }

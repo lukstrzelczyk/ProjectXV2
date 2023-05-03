@@ -28,7 +28,7 @@ public:
 	Csoldier(std::string rank);
 	Csoldier(const Csoldier& sample);
 	Csoldier(std::string text, int cos);
-	Csoldier(size_t num);
+	Csoldier(size_t num,std::string rank,int cos);
 	~Csoldier();
 	//-------------------
 	std::string get_name()const;
@@ -40,7 +40,7 @@ public:
 	size_t get_age()const;
 	size_t get_num()const;
 	void set_rank(const std::string& new_rank);
-	void set_rank(const size_t& num );
+	void set_age(const size_t& a);
 	void set_order(const size_t& index, std::string order, std::string date);
 	//-------------------
 
@@ -54,5 +54,6 @@ public:
 		this->Csoldier::Csoldier(clone);
 	}
 	void printoperator(std::ostream& out)const;
+
 };
 

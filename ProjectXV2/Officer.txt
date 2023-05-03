@@ -1,1 +1,1 @@
-Company B;Gniewko;Von Richtoffen;first lieutenant;40;179;0
+Company A;Tomasz;Zdradziecki;private;22;742;1;Purple Heart;29.11.2000; 
