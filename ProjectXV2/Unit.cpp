@@ -19,6 +19,7 @@ Unit::~Unit()
 	for (auto i = soldiers.begin(); i != soldiers.end(); ++i) {
 		delete *i;
 	}
+	soldiers.clear();
 }
 
 Stryker& Unit::operator[](const size_t& index)

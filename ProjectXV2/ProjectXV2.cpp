@@ -21,11 +21,6 @@ void manage_vehicle(const size_t& index);
 int main()
 {
 #ifdef DBG
-	Person* P = new Officer;
-	Person* s = new Csoldier;
-
-	delete P;
-	delete s;
 	return 0;
 #endif // !DBG
 
