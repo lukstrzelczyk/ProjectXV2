@@ -26,6 +26,6 @@ public:
 	friend std::ostream& operator <<(std::ostream& out, const Person& S);
 	virtual void add_order(std::string order)=0;
 	virtual void take_away_order(const short& index)=0;
-
+	virtual ~Person() = 0;
 };
 
