@@ -11,15 +11,24 @@
 #include "Person.h"
 #include "Csoldier.h"
 #include "Officer.h"
+#include <map>
 
 class Unit
 {
+	class MyCompare {	
+	public:
+		friend class Unit;
+		bool operator()(Stryker s, const Stryker t) const {
+			return s < t;
+		}
+	};
 	static Unit* unit;
 	std::string name{"Company A"};
 	std::string type;
 	Officer* leader{ nullptr };
 	std::vector<Person*> soldiers;
 	std::vector<Stryker> vehicles;
+	std::map<Stryker, std::vector<Person*>,MyCompare> sol_in_veh;
 public:
 	void save_to_file();
 	Unit(std::string n = "Company A", std::string t = "Motorized",size_t nos=Random(20,40),size_t nov=Random(2,5));
@@ -38,5 +47,7 @@ public:
 	void delete_soldier(const size_t& index);
 	void enlistment();
 	void aging();
+	void assign();
+	void show_map();
 };
 

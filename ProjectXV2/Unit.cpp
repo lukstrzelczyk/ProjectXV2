@@ -64,6 +64,8 @@ void Unit::operator++()
 void Unit::operator--()
 {
 	vehicles.pop_back();
+	sol_in_veh.clear();
+	assign();
 }
 
 Unit* Unit::get_Unit()
@@ -79,6 +81,8 @@ void Unit::delete_soldier(const size_t& index)
 	auto i = soldiers.begin();
 	i = i + index;
 	soldiers.erase(i);
+	sol_in_veh.clear();
+	assign();
 }
 
 void Unit::enlistment()
@@ -97,6 +101,30 @@ void Unit::aging()
 		(*i)->set_age((*i)->get_age() + 1);
 	}
 	leader->set_age(leader->get_age() + 1);
+}
+
+void Unit::assign()
+{
+	auto j = soldiers.begin();
+	std::vector<Person*> temp;
+	for (auto i = 0; i < vehicles.size(); i++) {
+		for (auto k = 0; k < 9 || j != soldiers.end(); ++j, k++) {
+			temp.push_back(*j);
+		}
+		sol_in_veh.insert(std::pair < Stryker, std::vector<Person*>>(vehicles.at(i), temp));
+		temp.clear();
+	}
+}
+
+void Unit::show_map()
+{
+	auto j = 1;
+	for (auto i = sol_in_veh.begin(); i != sol_in_veh.end(); ++i,j++) {
+		std::cout << j << "\t" << std::get<0>(*i) << std::endl;
+		for (auto k : std::get<1>(*i)) {
+			std::cout << k;
+		}
+	}
 }
 
 std::istream& operator>>(std::istream& in, Unit& U)

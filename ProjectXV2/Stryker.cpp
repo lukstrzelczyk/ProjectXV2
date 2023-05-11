@@ -37,11 +37,22 @@ void Stryker::drive(const size_t& distance) {
 	Sleep(2000);
 }
 
+bool Stryker::operator==(const Stryker& clone)
+{
+	return (ID==clone.ID)? true : false ;
+}
+
 void Stryker::refuel()
 {
 	if(get_range()!=get_max_range())
 	set_range(get_max_range());
 	std::cout << "Fuel tank is full" << std::endl;
+}
+
+bool Stryker::operator<(const Stryker& clone)
+{
+
+	return ID<clone.ID;
 }
 
 void Stryker::show()

@@ -17,6 +17,9 @@ public:
 		this->Stryker::~Stryker();
 		this->Stryker::Stryker(clone);
 	}
+	bool operator==(const Stryker& clone);
+	bool operator<(const Stryker& clone);
+	friend class MyCompare;
 	void drive(const size_t& distance);
 	void refuel();
 	void show();
