@@ -31,7 +31,7 @@ class Unit
 	std::map<Stryker, std::vector<Person*>,MyCompare> sol_in_veh;
 public:
 	void save_to_file();
-	Unit(std::string n = "Company A", std::string t = "Motorized",size_t nos=Random(20,40),size_t nov=Random(2,5));
+	Unit(std::string n = "Company A", std::string t = "Motorized",size_t nos=Random(20,40),size_t nov=Random(2,4));
 	~Unit();
 	Stryker& operator[](const size_t& index);
 	size_t get_soldiers_size()const;

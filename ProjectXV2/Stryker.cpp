@@ -26,9 +26,10 @@ Stryker::~Stryker()
 }
 
 void Stryker::drive(const size_t& distance) {
+	if (get_range() == 0)std::cout << "Vehicle has no fuel" << std::endl;
 	if (distance >= get_range()) {
+		std::cout << "Vehicle has driven " << get_range() << "km and now is stationary due to lack of fuel" << std::endl;
 		set_range(0);
-		std::cout << "Vehicle has driven " << distance << "km and now is stationary due to lack of fuel" << std::endl;
 	}
 	else {
 		set_range(get_range() - distance);

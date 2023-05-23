@@ -21,9 +21,13 @@ void manage_vehicle(const size_t& index);
 int main()
 {
 #ifdef DBG
+	Unit::get_Unit()->assign();
+	Unit::get_Unit()->show_map();
+	delete Unit::get_Unit();
+
 	return 0;
 #endif // !DBG
-
+	std::string l;
 	std::string decision;
 	size_t cons{ 0 };
 	//CCompany* kompania{ nullptr };
@@ -39,9 +43,10 @@ int main()
 		std::cout << "6. Save to file\n";
 		std::cout << "7. Delete vehicle\n";
 		std::cout << "8. Manage vehicle\n";
+		std::cout << "9. Show vehicles with soldiers\n";
 		std::cout << "0. Exit\n";
 		std::getline(std::cin, decision);
-		switch (input_check(decision, 0, 8))
+		switch (input_check(decision, 0, 9))
 		{
 		case 1:
 			manage_company();
@@ -71,6 +76,13 @@ int main()
 			break;
 		case 8:
 			manage_vehicle(Random(0,Unit::get_Unit()->get_vehicles_size()-1));
+			break;
+		case 9:
+			
+			system("cls");
+			Unit::get_Unit()->assign();
+			Unit::get_Unit()->show_map();
+			std::getline(std::cin, l);
 			break;
 		case 0: flag = false;
 			//delete kompania;

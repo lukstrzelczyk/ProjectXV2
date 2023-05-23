@@ -105,10 +105,11 @@ void Unit::aging()
 
 void Unit::assign()
 {
+	if (!sol_in_veh.empty()) sol_in_veh.clear();
 	auto j = soldiers.begin();
 	std::vector<Person*> temp;
 	for (auto i = 0; i < vehicles.size(); i++) {
-		for (auto k = 0; k < 9 || j != soldiers.end(); ++j, k++) {
+		for (auto k = 0; k < 9 && j != soldiers.end(); ++j, k++) {
 			temp.push_back(*j);
 		}
 		sol_in_veh.insert(std::pair < Stryker, std::vector<Person*>>(vehicles.at(i), temp));
@@ -122,8 +123,10 @@ void Unit::show_map()
 	for (auto i = sol_in_veh.begin(); i != sol_in_veh.end(); ++i,j++) {
 		std::cout << j << "\t" << std::get<0>(*i) << std::endl;
 		for (auto k : std::get<1>(*i)) {
-			std::cout << k;
+			(*k).introduce();
+			std::cout<<std::endl;
 		}
+		std::cout << "==========================================\n";
 	}
 }
 
