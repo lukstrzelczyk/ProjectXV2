@@ -117,7 +117,7 @@ void Unit::assign()
 	}
 }
 
-void Unit::show_map()
+void Unit::show_map()const
 {
 	auto j = 1;
 	for (auto i = sol_in_veh.begin(); i != sol_in_veh.end(); ++i,j++) {

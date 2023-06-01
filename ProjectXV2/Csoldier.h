@@ -1,6 +1,6 @@
 #pragma once
 #include "Person.h"
-#include <iostream>
+import "iostream";
 #include "Functions.h"
 
 const std::string orders[] = { "Medal of Honor","Distinguished Service Cross","Purple Heart","Bronze Star Medal" };

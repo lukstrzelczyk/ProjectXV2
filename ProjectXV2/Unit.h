@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+import "iostream";
 #include <Windows.h>
 #include <iomanip>
 #include <fstream>
@@ -48,6 +48,6 @@ public:
 	void enlistment();
 	void aging();
 	void assign();
-	void show_map();
+	void show_map()const;
 };
 

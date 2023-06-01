@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+import "iostream";
 #include "Vehicle.h"
 #include "Functions.h"
 class Stryker:public Vehicle

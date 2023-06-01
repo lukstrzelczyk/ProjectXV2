@@ -1,4 +1,4 @@
-#include <iostream>
+import "iostream";
 #include <Windows.h>
 #include <fstream>
 #include <string>
