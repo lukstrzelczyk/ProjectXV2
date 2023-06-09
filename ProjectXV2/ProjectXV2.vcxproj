@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bushmaster_30.cpp" />
     <ClCompile Include="Csoldier.cpp" />
     <ClCompile Include="Diesel.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -139,8 +140,10 @@
     <ClCompile Include="Stryker.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="Wepon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bushmaster_30.h" />
     <ClInclude Include="Csoldier.h" />
     <ClInclude Include="Diesel.h" />
     <ClInclude Include="Engine.h" />
@@ -150,6 +153,7 @@
     <ClInclude Include="Stryker.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="Wepon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

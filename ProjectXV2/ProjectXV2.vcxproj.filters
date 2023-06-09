@@ -45,7 +45,10 @@
     <ClCompile Include="Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
+    <ClCompile Include="Wepon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bushmaster_30.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +80,10 @@
     <ClInclude Include="Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
+    <ClInclude Include="Wepon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bushmaster_30.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
