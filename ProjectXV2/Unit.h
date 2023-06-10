@@ -1,5 +1,6 @@
 #pragma once
-import "iostream";
+#include <iostream>
+#include <memory>
 #include <Windows.h>
 #include <iomanip>
 #include <fstream>
@@ -25,10 +26,10 @@ class Unit
 	static Unit* unit;
 	std::string name{"Company A"};
 	std::string type;
-	Officer* leader{ nullptr };
-	std::vector<Person*> soldiers;
+	std::unique_ptr<Officer> leader{ nullptr };
+	std::vector<std::shared_ptr<Person>> soldiers;
 	std::vector<Stryker> vehicles;
-	std::map<Stryker, std::vector<Person*>,MyCompare> sol_in_veh;
+	std::map<Stryker, std::vector<std::shared_ptr<Person>>,MyCompare> sol_in_veh;
 public:
 	void save_to_file();
 	Unit(std::string n = "Company A", std::string t = "Motorized",size_t nos=Random(20,40),size_t nov=Random(2,4));

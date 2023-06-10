@@ -1,6 +1,8 @@
 #pragma once
 #include "Person.h"
-import "iostream";
+#include <iostream>
+#include <vector>
+#include <memory>
 #include "Functions.h"
 
 const std::string orders[] = { "Medal of Honor","Distinguished Service Cross","Purple Heart","Bronze Star Medal" };
@@ -20,7 +22,7 @@ class Csoldier :   public Person
 		CCommendation(std::string com, std::string date);
 		friend class Csoldier;
 	};
-	CCommendation** decorations{ nullptr };
+	std::vector<std::unique_ptr<CCommendation>> decorations;
 	size_t num_of_dec;
 public: 
 	

@@ -7,7 +7,7 @@ Vehicle::Vehicle(size_t w, size_t s, size_t ft, size_t f, std::string t, size_t 
 
 Vehicle::~Vehicle()
 {
-	delete engine;
+	engine=nullptr;
 }
 
 size_t Vehicle::get_weight() const

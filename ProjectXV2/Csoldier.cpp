@@ -1,4 +1,5 @@
 #include "Csoldier.h"
+#include <algorithm>
 #include <iomanip>
 #include <Windows.h>
 #include <string>
@@ -28,9 +29,10 @@ Csoldier::Csoldier(size_t _age, std::string _name, std::string _surname, std::st
 	age = _age;
 	surname = _surname;
 	name = _name;
-	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
-	for (auto i = 0; i < num_of_dec; i++) {
-		decorations[i] = new CCommendation;
+	if (num_of_dec) {
+		for (auto i = 0; i < num_of_dec; i++) {
+			decorations.push_back(std::make_unique<CCommendation>());
+		}
 	}
 }
 
@@ -41,10 +43,11 @@ Csoldier::Csoldier(std::string rank)
 	surname = nazwiska[Random(0, 7)];
 	this->rank = rank;
 	num_of_dec = Random(0, 3);
-	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
-	for (auto i = 0; i < num_of_dec; i++) {
-		decorations[i] = new CCommendation;
-	};
+	if (num_of_dec) {
+		for (auto i = 0; i < num_of_dec; i++) {
+			decorations.push_back(std::make_unique<CCommendation>());
+		}
+	}
 }
 
 Csoldier::Csoldier(const Csoldier& sample) :ID(sample.ID)
@@ -54,12 +57,20 @@ Csoldier::Csoldier(const Csoldier& sample) :ID(sample.ID)
 	surname = sample.surname;
 	rank = sample.rank;
 	num_of_dec = sample.num_of_dec;
-	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
+	if (num_of_dec) {
+		for (auto i = 0; i < num_of_dec; i++) {
+			decorations.push_back(std::make_unique<CCommendation>());
+		}
+	}
+	int i = 0;
+	std::for_each(decorations.begin(), decorations.end(), [sample,&i](std::unique_ptr<CCommendation>& n) {n->commendation= sample.decorations.at(i)->commendation; 
+	n->date = sample.decorations.at(i)->date; i++; });
+		/*decorations = new CCommendation * [num_of_dec];
 	for (auto i = 0; i < num_of_dec; i++) {
 		decorations[i] = new CCommendation; 
 		decorations[i]->commendation = sample.decorations[i]->commendation;
 		decorations[i]->date = sample.decorations[i]->date;
-	}
+	}*/
 } //trzeba się zastanowić kiedy użyć!!!!!!!!!!!!!!
 
 Csoldier::Csoldier(std::string text, int cos) {
@@ -76,7 +87,6 @@ Csoldier::Csoldier(std::string text, int cos) {
 	temp = text.substr(pos + 1, pos1 - 1 - pos);
 	age = digit_check(temp, "age");
 	num_of_dec = 0;
-	decorations = nullptr;
 }
 
 Csoldier::Csoldier(size_t num, std::string rank,int cos)
@@ -86,10 +96,15 @@ Csoldier::Csoldier(size_t num, std::string rank,int cos)
 	surname = nazwiska[Random(0, 7)];
 	this->rank = rank;
 	num_of_dec = num;
-	if (num_of_dec) decorations = new CCommendation * [num_of_dec];
+	if (num_of_dec) {
+		for (auto i = 0; i < num_of_dec; i++) {
+			decorations.push_back(std::make_unique<CCommendation>());
+		}
+	}
+		/* decorations = new CCommendation * [num_of_dec];
 	for (auto i = 0; i < num_of_dec; i++) {
 		decorations[i] = new CCommendation;
-	};
+	};*/
 }
 
 //---------------------------------------------------
@@ -97,11 +112,7 @@ Csoldier::Csoldier(size_t num, std::string rank,int cos)
 
 Csoldier::~Csoldier()
 {
-	if (num_of_dec) {
-		for (auto i = 0; i < num_of_dec; i++)delete decorations[i];
-		delete[] decorations;
-	}
-	decorations = nullptr;
+	decorations.clear();
 	num_of_dec = 0;
 }
 
@@ -140,10 +151,6 @@ size_t Csoldier::get_ID()const { return ID; }
 
 void Csoldier::add_order(std::string order)
 {
-	CCommendation** temp = new CCommendation*[num_of_dec + 1];
-	for (auto i = 0; i < num_of_dec; i++) {
-		temp[i] = decorations[i];
-	}
 	time_t now = time(0);
 	tm t;
 	std::string day;
@@ -153,9 +160,7 @@ void Csoldier::add_order(std::string order)
 	day.append(std::to_string(t.tm_mon + 1));
 	day.append(".");
 	day.append(std::to_string(t.tm_year + 1900));
-	temp[num_of_dec] = new CCommendation(order,day);
-	delete[] decorations;
-	decorations = temp;
+	decorations.push_back(std::make_unique<CCommendation>(order,day));
 	num_of_dec++;
 }
 
@@ -167,21 +172,10 @@ void Csoldier::take_away_order(const short& index)
 		return;
 	}
 	else if (num_of_dec == 1) {
-		delete[] this->decorations;
-		this->decorations = nullptr;
+		decorations.clear();
 	}
 	else {
-		CCommendation** temp = new CCommendation*[num_of_dec - 1];
-		for (auto i = 0, j = 0; i < num_of_dec - 1; i++, j++)
-		{
-			if (j == index) {
-				delete decorations[j];
-				j++;
-			}
-			temp[i] = decorations[j];
-		}
-		delete[] this->decorations;
-		this->decorations = temp;
+		decorations.erase(decorations.begin() + index);
 	}
 	num_of_dec--;
 }

@@ -4,9 +4,9 @@ Unit* Unit::unit = nullptr;
 
 Unit::Unit(std::string n, std::string t, size_t nos, size_t nov): name{n},type{t}
 {
-	leader = new Officer;
+	leader = std::make_unique<Officer>();
 	for (auto i = 0; i < nos; i++) {
-		soldiers.push_back(new Csoldier);
+		soldiers.push_back(std::make_shared<Csoldier>());
 	}
 	for (auto i = 0; i < nov; i++) {
 		vehicles.push_back(Stryker::Stryker());
@@ -15,10 +15,7 @@ Unit::Unit(std::string n, std::string t, size_t nos, size_t nov): name{n},type{t
 
 Unit::~Unit()
 {
-	delete leader;
-	for (auto i = soldiers.begin(); i != soldiers.end(); ++i) {
-		delete *i;
-	}
+	leader = nullptr;
 	soldiers.clear();
 }
 
@@ -89,7 +86,7 @@ void Unit::enlistment()
 {
 	size_t num = Random(0, 5);
 	for (auto i = 0; i <num ;i++) {
-		soldiers.push_back(new Csoldier{0,"private",0});
+		soldiers.push_back(std::make_shared<Csoldier>(0,"private",0));
 	}
 	std::cout << "Added " << num << " soldiers";
 	Sleep(1000);
@@ -107,12 +104,12 @@ void Unit::assign()
 {
 	if (!sol_in_veh.empty()) sol_in_veh.clear();
 	auto j = soldiers.begin();
-	std::vector<Person*> temp;
+	std::vector<std::shared_ptr<Person>> temp;
 	for (auto i = 0; i < vehicles.size(); i++) {
 		for (auto k = 0; k < 9 && j != soldiers.end(); ++j, k++) {
 			temp.push_back(*j);
 		}
-		sol_in_veh.insert(std::pair < Stryker, std::vector<Person*>>(vehicles.at(i), temp));
+		sol_in_veh.insert(std::pair < Stryker, std::vector<std::shared_ptr<Person>>>(vehicles.at(i), temp));
 		temp.clear();
 	}
 }
@@ -122,8 +119,8 @@ void Unit::show_map()const
 	auto j = 1;
 	for (auto i = sol_in_veh.begin(); i != sol_in_veh.end(); ++i,j++) {
 		std::cout << j << "\t" << std::get<0>(*i) << std::endl;
-		for (auto k : std::get<1>(*i)) {
-			(*k).introduce();
+		for (auto k = std::get<1>(*i).begin(); k != std::get<1>(*i).end();k++) {
+			(*k)->introduce();
 			std::cout<<std::endl;
 		}
 		std::cout << "==========================================\n";
@@ -134,7 +131,7 @@ std::istream& operator>>(std::istream& in, Unit& U)
 {
 	std::string line;
 	while (std::getline(in, line)) {
-		U.soldiers.push_back(new Csoldier(Csoldier::load(line)));
+		U.soldiers.push_back(std::make_shared< Csoldier>(Csoldier::load(line)));
 	}
 	return in;
 }

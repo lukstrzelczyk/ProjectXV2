@@ -1,5 +1,6 @@
 #pragma once
-import "iostream";
+#include <iostream>
+#include <memory>
 #include "Engine.h"
 #include "Diesel.h"
 #include "Functions.h"
@@ -7,7 +8,7 @@ import "iostream";
 class Vehicle
 {
 protected:
-	Engine* engine;
+	std::unique_ptr<Engine> engine;
 private:
 	size_t weight{ 1000 };
 	size_t speed{50};
