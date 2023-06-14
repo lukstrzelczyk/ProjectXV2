@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <iterator>
 #include "Functions.h"
 #include "Stryker.h"
 #include "Vehicle.h"
@@ -37,6 +38,7 @@ public:
 	Stryker& operator[](const size_t& index);
 	size_t get_soldiers_size()const;
 	size_t get_vehicles_size()const;
+	std::vector<std::shared_ptr<Person>> get_sol_vect();
 	void show_soldier(const size_t& index);
 	void add_order(const size_t& index, std::string order);
 	void take_away_order(const size_t& index, size_t& idx);

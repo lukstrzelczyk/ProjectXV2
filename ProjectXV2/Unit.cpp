@@ -33,6 +33,15 @@ size_t Unit::get_vehicles_size()const {
 	return vehicles.size();
 }
 
+std::vector<std::shared_ptr<Person>> Unit::get_sol_vect()
+{
+	std::vector < std::shared_ptr<Person>> temp;
+	size_t n = Random(0, soldiers.size() - 5);
+	auto i = soldiers.begin() + n;
+	std::copy(i, i + 5, std::back_inserter(temp));
+	return temp;
+}
+
 void Unit::show_soldier(const size_t& index)
 {
 	soldiers.at(index)->show();

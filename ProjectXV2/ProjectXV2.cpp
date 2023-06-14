@@ -1,5 +1,8 @@
 #include <iostream>
 #include <memory>
+#include <algorithm>
+#include <map>
+#include <iterator>
 #include <Windows.h>
 #include <fstream>
 #include <string>
@@ -15,6 +18,7 @@ void manage_soldier(const size_t& index);
 void manage_company();
 void load_from_file();
 void manage_vehicle(const size_t& index);
+void shooting_range();
 
 
 //#define DBG 1
@@ -22,9 +26,7 @@ void manage_vehicle(const size_t& index);
 int main()
 {
 #ifdef DBG
-	Unit::get_Unit()->assign();
-	Unit::get_Unit()->show_map();
-	delete Unit::get_Unit();
+	 shooting_range();
 
 	return 0;
 #endif // !DBG
@@ -45,9 +47,10 @@ int main()
 		std::cout << "7. Delete vehicle\n";
 		std::cout << "8. Manage vehicle\n";
 		std::cout << "9. Show vehicles with soldiers\n";
+		std::cout << "10. Shooting range\n";
 		std::cout << "0. Exit\n";
 		std::getline(std::cin, decision);
-		switch (input_check(decision, 0, 9))
+		switch (input_check(decision, 0, 10))
 		{
 		case 1:
 			manage_company();
@@ -84,6 +87,10 @@ int main()
 			Unit::get_Unit()->assign();
 			Unit::get_Unit()->show_map();
 			std::getline(std::cin, l);
+			break;
+		case 10:
+			system("cls");
+			shooting_range();
 			break;
 		case 0: flag = false;
 			//delete kompania;
@@ -200,4 +207,33 @@ void manage_vehicle(const size_t& index) {
 			break;
 		}
 	} while (flag);
+}
+
+void shooting_range()
+{
+	auto i = 1;
+	std::map<int, std::shared_ptr<Person>> stand;
+	std::map<int, int> results;
+	std::map<std::pair<int, std::shared_ptr < Person>>, int> sol_results;
+	std::map<int, std::shared_ptr<Person>> podium;
+	std::vector<std::shared_ptr <Person>>sol = Unit::get_Unit()->get_sol_vect();
+	std::for_each(sol.begin(), sol.end(), [&stand, &i](std::shared_ptr<Person> n) {stand.insert(std::pair(i, n)); i++; });
+	//std::for_each(stand.begin(), stand.end(), [](std::pair< const int, std::shared_ptr <Person>>& n) {std::cout << "Stand: " << n.first << std::endl; n.second->introduce(); std::cout << std::endl; });
+	std::for_each(stand.begin(), stand.end(), [&results](std::pair<const int, std::shared_ptr <Person>>& n) {results.insert(std::pair(std::get<0>(n), Random(0, 10))); });
+	//std::for_each(results.begin(), results.end(), [](std::pair<const int,  int>& n) {std::cout << "Stand\tResult\n"; std::cout << "   " << std::get<0>(n) << "\t   " << std::get<1>(n) << std::endl; });
+	auto j = results.begin();
+	std::for_each(stand.begin(), stand.end(), [&j, &sol_results](std::pair< const int, std::shared_ptr <Person>>& n) {sol_results.insert(std::pair(n, std::get<1>(*j))); j++; });
+	std::for_each(sol_results.begin(), sol_results.end(), [](std::pair<const std::pair<  int, std::shared_ptr < Person>>, int>& n) {
+		std::cout << "Stand: " << std::get<0>(std::get<0>(n)) << std::endl;
+		std::get<1>(std::get<0>(n))->introduce();
+		std::cout << "Result:        " << std::get<1>(n) << std::endl;
+		std::cout << std::endl;
+	});
+	std::cout << "Highest score:\n";
+	auto first_place = std::max_element(sol_results.begin(), sol_results.end(), [](const std::pair<const std::pair<  int, std::shared_ptr < Person>>, int>& p1, const std::pair<const std::pair<  int, std::shared_ptr < Person>>, int>& p2) {return p1.second < p2.second; });
+	std::get<1>(std::get<0>(*first_place))->introduce();
+	std::cout << "Result:         " << std::get<1>(*first_place) << std::endl;
+	std::cout << std::endl;
+	std::cout << "click any button to get back to menu";
+	std::getchar();
 }
