@@ -139,8 +139,13 @@ void Unit::show_map()const
 std::istream& operator>>(std::istream& in, Unit& U)
 {
 	std::string line;
+	std::shared_ptr<Csoldier> temp=nullptr;
+	auto I = U.soldiers.begin();
 	while (std::getline(in, line)) {
-		U.soldiers.push_back(std::make_shared< Csoldier>(Csoldier::load(line)));
+		temp = nullptr;
+		temp = std::make_shared<Csoldier>(Csoldier::load(line));
+		U.soldiers.push_back(temp);
+
 	}
 	return in;
 }

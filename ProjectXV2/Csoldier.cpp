@@ -52,6 +52,7 @@ Csoldier::Csoldier(std::string rank)
 
 Csoldier::Csoldier(const Csoldier& sample) :ID(sample.ID)
 {
+	this->~Csoldier();
 	age = sample.age;
 	name = sample.name;
 	surname = sample.surname;
@@ -61,10 +62,17 @@ Csoldier::Csoldier(const Csoldier& sample) :ID(sample.ID)
 		for (auto i = 0; i < num_of_dec; i++) {
 			decorations.push_back(std::make_unique<CCommendation>());
 		}
+		int i = 0;
+		for (auto& v : decorations) {
+			v->commendation = sample.decorations.at(i)->commendation;
+			v->date = sample.decorations.at(i)->date;
+			i++;
+		}
 	}
-	int i = 0;
-	std::for_each(decorations.begin(), decorations.end(), [sample,&i](std::unique_ptr<CCommendation>& n) {n->commendation= sample.decorations.at(i)->commendation; 
+	/*std::for_each(decorations.begin(), decorations.end(), [sample,&i](std::unique_ptr<CCommendation>& n) {n->commendation= sample.decorations.at(i)->commendation; 
 	n->date = sample.decorations.at(i)->date; i++; });
+	}*/
+	
 		/*decorations = new CCommendation * [num_of_dec];
 	for (auto i = 0; i < num_of_dec; i++) {
 		decorations[i] = new CCommendation; 
